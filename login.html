@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css">
+
+</head>
+
+<body id="IngresoLogin">
+  <main class="mt-5">
+    <div class="container2">
+      <div>
+        <img src="img/login.png" alt="" class="logo">
+        <div class="button-box">
+          <div id="btn"></div>
+          <button type="button" id="btn-log"><h5>Iniciar Sesión<h5></button>
+          <button type="button" id="btn-reg"><h5>Registrarse</h5></button>
+        </div>
+        <div>
+          <form id="form-log">
+            <h3>¡Bienvenido!</h3>
+            <p>Ingresa tus datos en los siguientes campos para poder acceder a tu cuenta</p>
+            <input type="text"  name="usuario" id="User" placeholder="Email o nombre de usuario" required>
+            <input type="password" name="contraseña" id="Pass" minlength="6" placeholder="Contraseña" required>
+            <input type="checkbox" name="mantenerini" id="manteneriniciado"> <span>Mantener sesión abierta</span>
+            <label for="manteneriniciado"></label>
+            <a href="">¿Olvidaste tu contraseña?</a>
+            <button type="submit" id="btn-submitlog">Ingresar</button>
+          </form>
+
+        <form id="form-reg">
+          <input type="text" name="nuevousuario" id="New-User" placeholder="Nombre de Usuario" required>
+          <input type="email" name="nuevoemail" id="New-Mail" placeholder="Email" required>
+          <input type="tel" minlength="9" placeholder="Celular" required>
+          <label for="Departamento">Departamento</label>
+          <select name="dep" id="Departamento" required> 
+            <option>--Elige un Departamento--</option>
+            <option value="Artigas">Artigas</option>
+            <option value="Canelones">Canelones</option>
+            <option value="CerroLargo">Cerro Largo</option>
+            <option value="Colonia">Colonia</option>
+            <option value="Durazno">Durazno</option>
+            <option value="Flores">Flores</option>
+            <option value="Florida">Florida</option>
+            <option value="Lavalleja">Lavalleja</option>
+            <option value="Maldonado">Maldonado</option>
+            <option value="Montevideo">Montevideo</option>
+            <option value="Paysandu">Paysandú</option>
+            <option value="Rionegro">Río Negro</option>
+            <option value="Rivera">Rivera</option>
+            <option value="Rocha">Rocha</option>
+            <option value="Salto">Salto</option>
+            <option value="Sanjose">San José</option>
+            <option value="Soriano">Soriano</option>
+            <option value="Tacuarembo">Tacuarembó</option>
+            <option value="Treintaytres">Treinta y Tres</option>
+          </select>
+          <input type="text" name="newcity" placeholder="Ciudad" required>
+          <input type="text" name="newdir" placeholder="Direccion" required>
+          <input type="password" name="newpass" id="newpass" minlength="6" placeholder="Contraseña" required>
+          <input type="password" name="confpass" id="confpass" minlength="6" placeholder="Repetir Contraseña" required>
+          <label for="chk-data"></label>
+          <input type="checkbox" name="recibedata" id="chk-data"> <span>¿Deseas recibir información actualizada?</span>
+          <button type="submit" id="btn-submitreg">REGISTRARME</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+    </div>
+  </footer>
+  <script src="js/login.js"></script>
+</body>
+
+</html>
