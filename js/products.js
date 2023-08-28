@@ -9,7 +9,6 @@ async function get_categories_list() {
         return categorias;
     } else {
         console.log("Hubo un error");
-        throw new Error("Error fetching categories");
     }
 }
 
@@ -25,7 +24,6 @@ async function get_products_por_nombre(nombre_categoria) {
         return await get_products_por_id(id);
     } else {
         console.log("Categoría no encontrada");
-        throw new Error("Category not found");
     }
 }
 
@@ -38,13 +36,13 @@ async function get_products_por_id(id) {
         return json.products;
     } else {
         console.log("Hubo un error");
-        throw new Error("Error fetching products");
     }
 }
 
 async function mostrar_products() {
     try {
-        let products = await get_products_por_id(101);
+        id = localStorage.getItem("catID");
+        let products = await get_products_por_id(id);
         displayProducts(products);
     } catch (error) {
         console.error(error);
