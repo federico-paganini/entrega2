@@ -44,8 +44,8 @@ async function get_products_por_id(id) {
 
 async function mostrar_products() {
     try {
-        let products = await get_products_por_id(101);
-        displayProducts(products);
+        allProducts = await get_products_por_id(101);
+        displayProducts(allProducts);
     } catch (error) {
         console.error(error);
     }
@@ -54,10 +54,12 @@ async function mostrar_products() {
 function displayProducts(products) {
     const productsContainer = document.getElementById("products-container");
 
+    productsContainer.innerHTML = '';  // agregue para que funcione la wea no borraba los datos anteriores al usar filtro. 
+
     products.forEach(product => {
         
         let productCard = document.createElement("div");
-        productCard.classList.add("card", "mb-4", );
+        productCard.classList.add("card", "col-3", );  //CAMBIE EL TIPO DE FORMATO DE PRESENTACION DE DATOS A COL POQUE QUEDA MEJOR A LA VISTA QUE LOS MB-4 QUE ESTABAN ANTES 
 
         let productImage = document.createElement("img");
         productImage.src = product.image;
@@ -97,6 +99,27 @@ function displayProducts(products) {
 
         productsContainer.appendChild(productCard);
     });
+}
+
+
+
+
+
+document.getElementById("accionfiltrar").addEventListener("click", aplicarfiltrado);
+
+
+
+function aplicarfiltrado() {
+    const minprecio = parseFloat(document.getElementById("minimofiltro1").value);
+    const maxprecio = parseFloat(document.getElementById("maximofiltro1").value);
+
+    if (isNaN(minprecio) || isNaN(maxprecio) || minprecio < 0 || maxprecio < 0) {
+        alert("Por favor, ingresa valores numéricos válidos.");
+        return;
+    }
+
+    const productosFiltrados = allProducts.filter(producto => producto.cost >= minprecio && producto.cost <= maxprecio);
+    displayProducts(productosFiltrados);
 }
 
 mostrar_products();
