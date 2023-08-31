@@ -40,10 +40,11 @@ async function get_products_por_id(id) {
 }
 
 async function mostrar_products() {
+
   try {
-    let id = localStorage.getItem("catID");
-    let products = await get_products_por_id(id);
-    let categorias = await get_categories_list();
+     id = localStorage.getItem("catID");
+     allProducts = await get_products_por_id(id);
+     categorias = await get_categories_list();
     cambiarTitulo(categorias, id);
     displayProducts(products);
   } catch (error) {
@@ -56,6 +57,7 @@ function cambiarTitulo(categorias, id) {
     if (categorias[index].id == id) {
       document.getElementById("categoriaTitulo").textContent = categorias[index].name;
       break;
+
     }
   }
 }
@@ -67,10 +69,14 @@ function displayProducts(products) {
     let productCard = document.createElement("div");
     productCard.classList.add("card", "mb-4");
 
-    let productImage = document.createElement("img");
-    productImage.src = product.image;
-    productImage.alt = product.name;
-    productImage.className = "card-img-top";
+
+    productsContainer.innerHTML = '';  // agregue para que funcione la wea no borraba los datos anteriores al usar filtro. 
+
+    products.forEach(product => {
+        
+        let productCard = document.createElement("div");
+        productCard.classList.add("card", "col-3", );  //CAMBIE EL TIPO DE FORMATO DE PRESENTACION DE DATOS A COL POQUE QUEDA MEJOR A LA VISTA QUE LOS MB-4 QUE ESTABAN ANTES 
+
 
     let cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
@@ -107,4 +113,42 @@ function displayProducts(products) {
   });
 }
 
+
+
+document.getElementById("accionfiltrar").addEventListener("click", aplicarfiltrado);
+
+
+
+function aplicarfiltrado() {
+    const minprecio = parseFloat(document.getElementById("minimofiltro1").value);
+    const maxprecio = parseFloat(document.getElementById("maximofiltro1").value);
+
+
+    if (isNaN(minprecio) || isNaN(maxprecio) || minprecio < 0 || maxprecio < 0) {
+        alert("Por favor, ingresa valores numéricos válidos.");
+        return;
+    }
+
+    const productosFiltrados = allProducts.filter(producto => producto.cost >= minprecio && producto.cost <= maxprecio);
+    displayProducts(productosFiltrados);
+}
+// quitar filtrado
+document.getElementById("eliminarfiltro").addEventListener("click", QuitarFiltrado )
+
+function QuitarFiltrado(){
+    displayProducts(allProducts);
+}
+//odenar alfabeticamente     
+
+document.getElementById("filtrarAZ").addEventListener("click", function(){
+    allProducts.sort((a, b) => a.name.localeCompare(b.name));
+    displayProducts(allProducts);
+});
+
+document.getElementById("filtrarZA").addEventListener("click", function(){
+    allProducts.sort((a, b) => b.name.localeCompare(a.name));
+    displayProducts(allProducts);
+});
+
 mostrar_products();
+

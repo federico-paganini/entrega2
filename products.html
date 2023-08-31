@@ -41,7 +41,26 @@
       <h1>PRODUCTOS</h1>
       <h2>Verás aqui todos los productos de la lista <span id="categoriaTitulo"></span></h2>
       </div>
- 
+    
+      <div id="filtroalfabetico">
+        
+        <button type="button" id="filtrarAZ"> A-Z </button>
+        <button type="button" id="filtrarZA"> Z-A </button>
+
+      </div>
+
+      
+    <div id="pricefilter">
+      <input type="number"  id="minimofiltro1" name="numberminimo" placeholder="Valor desde">
+      <input type="number" id="maximofiltro1" name="numbermaximo" placeholder="Valor hasta">
+      <button type="button" id="accionfiltrar"> FILTRAR </button>
+      <button type="button"id="eliminarfiltro">Quitar Filtro</button>
+      
+    </div>
+
+
+
+
   <main>
     <div class="container">
         <div class="row" id="products-container">
@@ -72,5 +91,8 @@
   <script src="js/init.js"></script>
   <script src="js/products.js"></script>
 </body>
+
+
+
 
 </html>
