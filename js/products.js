@@ -103,8 +103,6 @@ function displayProducts(products) {
 
 
 
-
-
 document.getElementById("accionfiltrar").addEventListener("click", aplicarfiltrado);
 
 
@@ -112,6 +110,7 @@ document.getElementById("accionfiltrar").addEventListener("click", aplicarfiltra
 function aplicarfiltrado() {
     const minprecio = parseFloat(document.getElementById("minimofiltro1").value);
     const maxprecio = parseFloat(document.getElementById("maximofiltro1").value);
+
 
     if (isNaN(minprecio) || isNaN(maxprecio) || minprecio < 0 || maxprecio < 0) {
         alert("Por favor, ingresa valores numéricos válidos.");
@@ -121,5 +120,23 @@ function aplicarfiltrado() {
     const productosFiltrados = allProducts.filter(producto => producto.cost >= minprecio && producto.cost <= maxprecio);
     displayProducts(productosFiltrados);
 }
+// quitar filtrado
+document.getElementById("eliminarfiltro").addEventListener("click", QuitarFiltrado )
+
+function QuitarFiltrado(){
+    displayProducts(allProducts);
+}
+//odenar alfabeticamente     
+
+document.getElementById("filtrarAZ").addEventListener("click", function(){
+    allProducts.sort((a, b) => a.name.localeCompare(b.name));
+    displayProducts(allProducts);
+});
+
+document.getElementById("filtrarZA").addEventListener("click", function(){
+    allProducts.sort((a, b) => b.name.localeCompare(a.name));
+    displayProducts(allProducts);
+});
 
 mostrar_products();
+
