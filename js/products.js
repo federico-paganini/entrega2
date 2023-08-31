@@ -31,7 +31,7 @@ async function get_products_por_nombre(nombre_categoria) {
 
 async function get_products_por_id(id) {
     let URL = URL_products + id + ".json";
-    
+
     const response = await fetch(URL);
     if (response.ok) {
         let json = await response.json();
@@ -44,7 +44,8 @@ async function get_products_por_id(id) {
 
 async function mostrar_products() {
     try {
-        let products = await get_products_por_id(101);
+        id = localStorage.getItem("catID");
+        let products = await get_products_por_id(id);
         displayProducts(products);
     } catch (error) {
         console.error(error);
@@ -55,9 +56,9 @@ function displayProducts(products) {
     const productsContainer = document.getElementById("products-container");
 
     products.forEach(product => {
-        
+
         let productCard = document.createElement("div");
-        productCard.classList.add("card", "mb-4", );
+        productCard.classList.add("card", "mb-4",);
 
         let productImage = document.createElement("img");
         productImage.src = product.image;
@@ -92,7 +93,7 @@ function displayProducts(products) {
         cardBody.appendChild(productQuantitySold);
 
         productCard.appendChild(productImage);
-        
+
         productCard.appendChild(cardBody);
 
         productsContainer.appendChild(productCard);
@@ -100,3 +101,38 @@ function displayProducts(products) {
 }
 
 mostrar_products();
+
+
+// Barra de Búsqueda producto
+const barrabusq = document.getElementById("search-bar");
+const barrshow = document.getElementById("show");
+
+barrabusq.addEventListener("input", async()=>{
+ try {
+    const id = localStorage.getItem("catID");
+    const productos = await get_products_por_id(id);
+    const categorias = await get_categories_list();
+    const texto = barrabusq.value.toLowerCase();
+    let resultado = "";
+
+    productos.forEach((producto)=>{
+        const productoNombre = producto.name.toLowerCase();
+        if (productoNombre.includes(texto)) {
+            resultado +=  `<li>${producto.name}</li>`
+        };
+    });
+    categorias.forEach((categoria)=>{
+        const categoriaNombre = categoria.name.toLowerCase();
+        if (categoriaNombre.includes(texto)) {
+            resultado +=  `<li>${categoria.name}</li>`
+        };
+    });
+    if (resultado===""){
+        resultado +=  `<li>Producto no encontrado...</li>`
+    };
+    barrshow.innerHTML=resultado;
+ } catch (error){
+    console.error(error);
+ };
+        
+});
