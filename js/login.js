@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (user.value && pass.value && (pass.value.length >= 6)) {
             alert("Logueado correctamente");
             localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem("email",user.value);
             setTimeout(function () {
                 window.location.href = "index.html";
             }, 2000);
