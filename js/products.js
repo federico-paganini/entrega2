@@ -46,7 +46,7 @@ async function mostrar_products() {
      allProducts = await get_products_por_id(id);
      categorias = await get_categories_list();
     cambiarTitulo(categorias, id);
-    displayProducts(products);
+    displayProducts(allProducts);
   } catch (error) {
     console.error(error);
   }
@@ -65,53 +65,53 @@ function cambiarTitulo(categorias, id) {
 function displayProducts(products) {
   const productsContainer = document.getElementById("products-container");
 
-  products.forEach((product) => {
-    let productCard = document.createElement("div");
-    productCard.classList.add("card", "mb-4");
+  productsContainer.innerHTML = '';  // agregue para que funcione la wea no borraba los datos anteriores al usar filtro. 
 
+  products.forEach(product => {
+      
+      let productCard = document.createElement("div");
+      productCard.classList.add("card", "col-3", );  //CAMBIE EL TIPO DE FORMATO DE PRESENTACION DE DATOS A COL POQUE QUEDA MEJOR A LA VISTA QUE LOS MB-4 QUE ESTABAN ANTES 
 
-    productsContainer.innerHTML = '';  // agregue para que funcione la wea no borraba los datos anteriores al usar filtro. 
+      let productImage = document.createElement("img");
+      productImage.src = product.image;
+      productImage.alt = product.name;
+      productImage.className = "card-img-top";
 
-    products.forEach(product => {
-        
-        let productCard = document.createElement("div");
-        productCard.classList.add("card", "col-3", );  //CAMBIE EL TIPO DE FORMATO DE PRESENTACION DE DATOS A COL POQUE QUEDA MEJOR A LA VISTA QUE LOS MB-4 QUE ESTABAN ANTES 
+      let cardBody = document.createElement("div");
+      cardBody.classList.add("card-body");
 
+      let productName = document.createElement("h5");
+      productName.textContent = product.name;
+      productName.classList.add("card-title");
 
-    let cardBody = document.createElement("div");
-    cardBody.classList.add("card-body");
+      let productDescription = document.createElement("p");
+      productDescription.textContent = product.description;
+      productDescription.classList.add("card-text");
 
-    let productName = document.createElement("h5");
-    productName.textContent = product.name;
-    productName.classList.add("card-title");
+      let productcost = document.createElement("p");
+      productcost.textContent = `Precio: $${product.cost}`;
+      productcost.classList.add("card-text");
 
-    let productDescription = document.createElement("p");
-    productDescription.textContent = product.description;
-    productDescription.classList.add("card-text");
+      let productQuantitySold = document.createElement("p");
+      productQuantitySold.textContent = `Cantidad Vendida: ${product.soldCount}`;
+      productQuantitySold.classList.add("card-text");
 
-    let productcost = document.createElement("p");
-    productcost.textContent = `Precio: $${product.cost}`;
-    productcost.classList.add("card-text");
+      cardBody.appendChild(productName);
 
-    let productQuantitySold = document.createElement("p");
-    productQuantitySold.textContent = `Cantidad Vendida: ${product.soldCount}`;
-    productQuantitySold.classList.add("card-text");
+      cardBody.appendChild(productDescription);
 
-    cardBody.appendChild(productName);
+      cardBody.appendChild(productcost);
 
-    cardBody.appendChild(productDescription);
+      cardBody.appendChild(productQuantitySold);
 
-    cardBody.appendChild(productcost);
+      productCard.appendChild(productImage);
+      
+      productCard.appendChild(cardBody);
 
-    cardBody.appendChild(productQuantitySold);
-
-    productCard.appendChild(productImage);
-
-    productCard.appendChild(cardBody);
-
-    productsContainer.appendChild(productCard);
+      productsContainer.appendChild(productCard);
   });
 }
+
 
 
 
