@@ -187,12 +187,12 @@ barrabusq.addEventListener("input", ()=>{
     if (productosFiltradosnombre.length === 0 && productosFiltradosdesc.length === 0) {
         ctn.innerHTML = `<p>Producto no encontrado...</p>`;
     } else {
-      if (productosFiltradosdesc.length === 0) {
-        ctn.innerHTML = ""; // Limpiar el contenido anterior
-        displayProducts(productosFiltradosnombre); // Mostrar los productos filtrados por nombre
-      } else {
+      if (productosFiltradosnombre.length === 0) {
         ctn.innerHTML = "";
         displayProducts(productosFiltradosdesc); // Mostrar los productos filtrados por descripción
+      } else {
+        ctn.innerHTML = ""; // Limpiar el contenido anterior
+        displayProducts(productosFiltradosnombre); // Mostrar los productos filtrados por nombre
       }         
     }
 });
