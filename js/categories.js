@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         showCategoriesList();
     });
 
-    //* Filtar con Barra de búsqueda *//
+    //* Filtar Categorías con Barra de búsqueda *//
 
     document.getElementById("search-bar").addEventListener("input" , function () {
         const busqueda = document.getElementById("search-bar").value.toLowerCase();
