@@ -181,19 +181,15 @@ barrabusq.addEventListener("input", ()=>{
     const productos = allProducts;
     const texto = barrabusq.value.toLowerCase();
     const ctn = document.getElementById("products-container");
-    const productosFiltradosnombre = allProducts.filter(producto => producto.name.toLowerCase().includes(texto));
-    const productosFiltradosdesc = allProducts.filter(producto => producto.description.toLowerCase().includes(texto));
+    const productosFiltradosnombre = allProducts.filter(producto => producto.name.toLowerCase().includes(texto)); // Filtrar productos por nombre
+    const productosFiltradosdesc = allProducts.filter(producto => producto.description.toLowerCase().includes(texto)); // Filtrar productos por descripción
+    const productosFiltrados = productosFiltradosnombre.concat(productosFiltradosdesc); // Priorizar el nombre sobre descripción
 
-    if (productosFiltradosnombre.length === 0 && productosFiltradosdesc.length === 0) {
+    if (productosFiltrados.length === 0) {
         ctn.innerHTML = `<p>Producto no encontrado...</p>`;
     } else {
-      if (productosFiltradosnombre.length === 0) {
         ctn.innerHTML = "";
-        displayProducts(productosFiltradosdesc); // Mostrar los productos filtrados por descripción
-      } else {
-        ctn.innerHTML = ""; // Limpiar el contenido anterior
-        displayProducts(productosFiltradosnombre); // Mostrar los productos filtrados por nombre
-      }         
+        displayProducts(productosFiltrados); // Mostrar los productos filtrados
     }
 });
 
