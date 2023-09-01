@@ -87,11 +87,14 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
+
+let originalArray = [];
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(CATEGORIES_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
-            currentCategoriesArray = resultObj.data
-            showCategoriesList()
+            currentCategoriesArray = resultObj.data;
+            originalArray = resultObj.data;
+            showCategoriesList();
             //sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
         }
     });
@@ -139,5 +142,25 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
 
         showCategoriesList();
+    });
+
+    //* Filtar con Barra de búsqueda *//
+
+    document.getElementById("search-bar").addEventListener("input" , function () {
+        const busqueda = document.getElementById("search-bar").value.toLowerCase();
+        const catFiltradas = currentCategoriesArray.filter(categ => categ.name.toLowerCase().includes(busqueda));
+        const catcontainer = document.getElementById("cat-list-container");
+        if(document.getElementById("search-bar").value !== "") {
+            if(catFiltradas.length === 0) {
+                catcontainer.innerHTML = "<p>Categoría no encontrada...<p>";
+            } else {
+                currentCategoriesArray = catFiltradas;
+                catcontainer.innerHTML="";
+                showCategoriesList();
+            }
+        } else {
+            currentCategoriesArray = originalArray;
+            showCategoriesList();
+        }
     });
 });
