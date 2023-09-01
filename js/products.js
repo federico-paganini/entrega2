@@ -42,11 +42,13 @@ async function get_products_por_id(id) {
 async function mostrar_products() {
 
   try {
+      
      id = localStorage.getItem("catID");
      allProducts = await get_products_por_id(id);
      categorias = await get_categories_list();
     cambiarTitulo(categorias, id);
     displayProducts(allProducts);
+    ordenoriginal=allProducts.slice();
   } catch (error) {
     console.error(error);
   }
@@ -120,34 +122,46 @@ document.getElementById("accionfiltrar").addEventListener("click", aplicarfiltra
 
 
 function aplicarfiltrado() {
-    const minprecio = parseFloat(document.getElementById("minimofiltro1").value);
-    const maxprecio = parseFloat(document.getElementById("maximofiltro1").value);
 
-
-    if (isNaN(minprecio) || isNaN(maxprecio) || minprecio < 0 || maxprecio < 0) {
-        alert("Por favor, ingresa valores numéricos válidos.");
-        return;
-    }
-
-    const productosFiltrados = allProducts.filter(producto => producto.cost >= minprecio && producto.cost <= maxprecio);
-    displayProducts(productosFiltrados);
+    displayProducts(filtrar());
 }
+
+function filtrar(){
+  const minprecio = parseFloat(document.getElementById("minimofiltro1").value|| 0); 
+  const maxprecio = parseFloat(document.getElementById("maximofiltro1").value|| Infinity);
+
+
+  if (isNaN(minprecio) || isNaN(maxprecio) || minprecio < 0 || maxprecio < 0) {
+      alert("Por favor, ingresa valores numéricos válidos.");
+      return;
+  }
+
+   productosFiltrados = allProducts.filter(producto => producto.cost >= minprecio && producto.cost <= maxprecio);
+   return(productosFiltrados);
+}
+
+
 // quitar filtrado
 document.getElementById("eliminarfiltro").addEventListener("click", QuitarFiltrado )
 
 function QuitarFiltrado(){
-    displayProducts(allProducts);
+    displayProducts(ordenoriginal);
+    
+    document.getElementById("minimofiltro1").value = '';
+    document.getElementById("maximofiltro1").value = '';
+
 }
+
 //odenar alfabeticamente     
 
 document.getElementById("filtrarAZ").addEventListener("click", function(){
-    allProducts.sort((a, b) => a.name.localeCompare(b.name));
-    displayProducts(allProducts);
+    filtrar().sort((a, b) => a.name.localeCompare(b.name));
+    displayProducts(productosFiltrados);
 });
 
 document.getElementById("filtrarZA").addEventListener("click", function(){
-    allProducts.sort((a, b) => b.name.localeCompare(a.name));
-    displayProducts(allProducts);
+  filtrar().sort((a, b) => b.name.localeCompare(a.name));
+    displayProducts(productosFiltrados);
 });
 
 mostrar_products();
