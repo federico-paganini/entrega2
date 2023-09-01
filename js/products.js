@@ -157,7 +157,15 @@ function QuitarFiltrado(){
 
 
 }
+document.getElementById("precioAscendiente").addEventListener("click", function(){
+  filtrar().sort((a, b) => a.soldCount > b.soldCount);
+  displayProducts(productosFiltrados);
+});
 
+document.getElementById("precioDescendiente").addEventListener("click", function(){
+    filtrar().sort((a, b) =>a.soldCount < b.soldCount);
+    displayProducts(productosFiltrados);
+});
 //odenar alfabeticamente     
 
 document.getElementById("filtrarAZ").addEventListener("click", function(){
