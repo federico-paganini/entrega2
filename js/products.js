@@ -44,9 +44,8 @@ async function get_products_por_id(id) {
 
 async function mostrar_products() {
     try {
-        id = localStorage.getItem("catID");
-        let products = await get_products_por_id(id);
-        displayProducts(products);
+        allProducts = await get_products_por_id(101);
+        displayProducts(allProducts);
     } catch (error) {
         console.error(error);
     }
@@ -105,34 +104,17 @@ mostrar_products();
 
 // Barra de Búsqueda producto
 const barrabusq = document.getElementById("search-bar");
-const barrshow = document.getElementById("show");
-
-barrabusq.addEventListener("input", async()=>{
- try {
-    const id = localStorage.getItem("catID");
-    const productos = await get_products_por_id(id);
-    const categorias = await get_categories_list();
+barrabusq.addEventListener("input", ()=>{
+ 
+    const productos = allProducts;
     const texto = barrabusq.value.toLowerCase();
-    let resultado = "";
+    const ctn = document.getElementById("products-container");
+    const productosFiltrados = allProducts.filter(producto => producto.name.toLowerCase().includes(texto));
 
-    productos.forEach((producto)=>{
-        const productoNombre = producto.name.toLowerCase();
-        if (productoNombre.includes(texto)) {
-            resultado +=  `<li>${producto.name}</li>`
-        };
-    });
-    categorias.forEach((categoria)=>{
-        const categoriaNombre = categoria.name.toLowerCase();
-        if (categoriaNombre.includes(texto)) {
-            resultado +=  `<li>${categoria.name}</li>`
-        };
-    });
-    if (resultado===""){
-        resultado +=  `<li>Producto no encontrado...</li>`
-    };
-    barrshow.innerHTML=resultado;
- } catch (error){
-    console.error(error);
- };
-        
+    if (productosFiltrados.length === 0) {
+        ctn.innerHTML = `<p>Producto no encontrado...</p>`;
+    } else {
+        ctn.innerHTML = ""; // Limpiar el contenido anterior
+        displayProducts(productosFiltrados); // Mostrar los productos filtrados
+    }
 });
