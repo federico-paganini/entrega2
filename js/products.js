@@ -159,12 +159,12 @@ document.addEventListener("DOMContentLoaded",()=>{
     
     
   }
-  document.getElementById("precioAscendiente").addEventListener("click", function(){
+  document.getElementById("menorRelevancia").addEventListener("click", function(){
     filtrar().sort((a, b) => a.soldCount - b.soldCount);
     displayProducts(productosFiltrados);
   });
   
-  document.getElementById("precioDescendiente").addEventListener("click", function(){
+  document.getElementById("mayorRelevancia").addEventListener("click", function(){
     filtrar().sort((a, b) => b.soldCount - a.soldCount);
     displayProducts(productosFiltrados);
   });
@@ -183,24 +183,49 @@ document.addEventListener("DOMContentLoaded",()=>{
   
   
   
-  // Barra de Búsqueda producto
-  const barrabusq = document.getElementById("search-bar");
-  barrabusq.addEventListener("input", ()=>{
-    
-    const productos = allProducts;
-    const texto = barrabusq.value.toLowerCase();
-    const ctn = document.getElementById("products-container");
-    const productosFiltradosnombre = allProducts.filter(producto => producto.name.toLowerCase().includes(texto)); // Filtrar productos por nombre
-    const productosFiltradosdesc = allProducts.filter(producto => producto.description.toLowerCase().includes(texto)); // Filtrar productos por descripción
-    const productosFiltrados = productosFiltradosnombre.concat(productosFiltradosdesc); // Priorizar el nombre sobre descripción
-    
-    if (productosFiltrados.length === 0) {
-      ctn.innerHTML = `<p>Producto no encontrado...</p>`;
-    } else {
-      ctn.innerHTML = "";
-      displayProducts(productosFiltrados); // Mostrar los productos filtrados
-    }
-  });
+ // Barra de Búsqueda producto
+
+ const barrabusq = document.getElementById("search-bar");
+ barrabusq.addEventListener("input", () => {
+
+   const texto = barrabusq.value.toLowerCase();
+   const ctn = document.getElementById("products-container");
+
+   //* Agregamos un Set para que no se repitan productos al filtrar por nombre y descripción *//
+   //* En un Set, los productos pueden aparecer solamente una vez *//
+   const flitrarSinRepetir = new Set();
+
+   allProducts.forEach(producto => {
+     const nombreProducto = producto.name.toLowerCase();
+     const descripcionProducto = producto.description.toLowerCase();
+
+     //* Compara si el nombre o la descripción contienen el texto de búsqueda *//
+     //* Se ubica primero en el if la constante nombreProducto para que se priorice el nombre sobre la descripción *//
+     if (nombreProducto.includes(texto) || descripcionProducto.includes(texto)) {
+       flitrarSinRepetir.add(producto); // Agregar el producto al conjunto
+     }
+   });
+
+   const productosFiltrados = [...flitrarSinRepetir]; // Convertir el conjunto en un Array
+   if (barrabusq.value !== "") {
+     if (productosFiltrados.length === 0) {
+       ctn.innerHTML = `<p>Producto no encontrado...</p>`;
+     } else {
+       ctn.innerHTML = "";
+       displayProducts(productosFiltrados); // Mostrar los productos filtrados
+     }
+   } else {
+     displayProducts(allProducts); // Volver a mostrar productos cuando la barra se vacía.
+   }
+
+ });
+
+
+ //* Mostrar todos los productos nuevamente cuando la barra de búsqueda pierde el foco *//
+
+ barrabusq.addEventListener("blur", function () {
+   displayProducts(allProducts);
+ }); 
   mostrar_products();
 });
   
