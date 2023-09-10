@@ -115,6 +115,18 @@ function displayProducts(products) {
       productCard.appendChild(cardBody);
 
       productsContainer.appendChild(productCard);
+
+
+         //creo evento dentro del foreach para cada tarjeta que se genera, al tocarla se guarda el id del producto en local storage. 
+
+
+    productCard.addEventListener("click", function () {
+
+      let selectedProductID = product.id;
+      localStorage.setItem(id, selectedProductID);
+      window.location.href= "product-info.html"
+
+    });
   });
 }
 
