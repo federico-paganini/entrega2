@@ -5,12 +5,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
   console.log(ProductID);
   
   // URL del API de comentarios
-  // const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
+  // const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/"; (ya está definido en init.js)
   
-  // Función para obtener los comentarios de un producto específico
-  function getComments(productId) {
-    const url = `${PRODUCT_INFO_COMMENTS_URL}${productId}.json`;
-  
+  // Función para obtener los comentarios
+    const url = `${PRODUCT_INFO_COMMENTS_URL}${ProductID}.json`;
     fetch(url)
       .then((response) => {
         if (!response.ok) {
@@ -24,7 +22,5 @@ document.addEventListener("DOMContentLoaded", function(e) {
       .catch((error) => {
         console.error("Error al obtener los comentarios:", error);
       });
-  }
-  getComments(ProductID);
 });
 
