@@ -249,7 +249,29 @@ a.custom-card:hover {
   padding-bottom: 0px;
 }
 
+/* Comentario.CCS */
+
+.divGral {
+    margin: 20px;
+    padding: 20px;
+    position: relative;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    border: 2px solid rgba(158, 158, 158, 0.5);
+    box-shadow: 0 1px 2px rgba(158, 158, 158, 0.5);
+    font-family: Arial, Helvetica, sans-serif;
+    flex: 1 1 10px;
+    font-family: 'Raleway';
+    font-style: italic;
+    font-weight: 500;
+    src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptsg8zYS_SKggPNyCg4Q4FqPfE.woff2) format('woff2');
+    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    width: 900px;
+}
+
+
 .estrellas {
-  font-size: 24px; /* Tamaño de las estrellas */
-  color: gold; /* Color de las estrellas llenas */
+  font-size: 30px; 
+  color: gold;
+  font-style: normal;
 }
