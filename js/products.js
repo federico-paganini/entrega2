@@ -123,7 +123,7 @@ function displayProducts(products) {
     productCard.addEventListener("click", function () {
 
       let selectedProductID = product.id;
-      localStorage.setItem(id, selectedProductID);
+      localStorage.setItem("ValorID", selectedProductID);
       window.location.href= "product-info.html"
 
     });
