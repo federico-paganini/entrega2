@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
         return response.json(); 
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
 
         //Funcion para mostrar los comentarios
         const container=document.getElementById("comments-container");
@@ -27,9 +27,25 @@ document.addEventListener("DOMContentLoaded", function(e) {
           div.textContent=info; //Contenido de texto dentro del elemento "div"
           container.appendChild(div) //el nuevo "div" se agrega como hijo al div de la variable "container".
         }
-        
+
+        //Pasar el score a formato de estrellas
+        function ScoreToEstrellas(score) {
+          const maxStars=5;
+          const fullStar='★'; 
+          const emptyStar= '☆';
+          const roundedScore = Math.round(score);
+          const fullStars = fullStar.repeat(roundedScore);
+          const emptyStars = emptyStar.repeat(maxStars - roundedScore);
+          const starSpan= document.createElement("span");
+          starSpan.classList.add("estrellas");
+          starSpan.textContent= fullStars + emptyStars;
+          return starSpan;
+        }
+
       data.forEach(comment=>{
-        CreateDiv(container, comment.score); //Se crea un nuevo div para mostrar el "score" (estrellas)
+        const stars = ScoreToEstrellas(comment.score);
+        container.appendChild(stars);
+        CreateDiv(container, stars); //Se crea un nuevo div para mostrar el "score" (estrellas)
         CreateDiv(container, comment.user); //Se crea un nuevo div para mostrar el nombre de los usuarios
         CreateDiv(container, comment.dateTime); //Se crea un nuevo div para mostrar la fecha de la creación de los comentarios
         CreateDiv(container, comment.description); //Se crea un nuevo div para mostrar el contenido del comentario
