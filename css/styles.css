@@ -249,7 +249,19 @@ a.custom-card:hover {
   padding-bottom: 0px;
 }
 
-/* Comentario.CCS */
+#infoContainer {
+  border-radius: 5px;
+  float: none;
+}
+
+#infoContainer .carousel-item{
+  float: none;
+}
+
+#infoImagenes img {
+  max-width: 50%;
+
+  /* Comentario.CCS */
 
 .divGral {
     margin: 20px;
