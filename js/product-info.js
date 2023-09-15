@@ -18,18 +18,18 @@ function showInfo(info) {
   let htmlContenido = "";
   let htmlImagenes = "";
 
-  htmlContenido += `
-        <div class="form float-end">
-                <button type="button" 
+    htmlContenido += `
+        <div class="row">
+            <div class="d-flex justify-content-between mb-3 mt-3"> 
+                <h1>${info.name}</h1> 
+                    <button type="button" 
                         class="btn btn-outline-success btn-lg active" 
                         onClick="carrito()"
                         id="btnComprar">
                         <i class="bi bi-cart-fill"></i>
-                    Agregar al carrito
-                </button>
+                        Agregar al carrito
+                    </button>
             </div>
-        <div class="row">
-            <h1>${info.name}</h1> 
             <hr>
             <p class="mb-1 fw-bold">Precio</p>
             <p>${info.currency} ${info.cost}</p><br>
@@ -41,17 +41,19 @@ function showInfo(info) {
             <p>${info.soldCount}</p><br>
             <p class="mb-3 fw-bold">Imágenes Ilustrativas</p><br>
         </div>
-    `;
-  document.getElementById("infoLista").innerHTML += htmlContenido;
+    `
+    document.getElementById("infoLista").innerHTML += htmlContenido;
 
   htmlImagenes += `
         <div class="carousel-item active">
             <img src="${arrayImg[0]}" alt="productoImg" class="d-block w-100">
         </div>
-    `;
-  //Mostrar las imagenes, con un for para recorrer el array
-  for (let i = 0; i < arrayImg.length; i++) {
-    htmlImagenes += `
+    `
+  
+    //Mostrar las imagenes, con un for para recorrer el array
+    for (let i = 1; i < arrayImg.length; i++) {
+        htmlImagenes += `
+
             <div class="carousel-item">
                 <img src="${arrayImg[i]}" alt="productoImg" class="d-block w-100">
             </div>
@@ -189,3 +191,4 @@ document.addEventListener("DOMContentLoaded", () => {
     comentario.value = "";
   });
 });
+
