@@ -185,6 +185,12 @@ a.custom-card:hover {
   text-decoration: inherit;
 }
 
+
+/* Cursor para seleccionar productos */
+.cardcursor {
+  cursor: pointer;
+}
+
 .checked {
   color: orange;
 }
@@ -249,17 +255,15 @@ a.custom-card:hover {
   padding-bottom: 0px;
 }
 
-#infoContainer {
-  border-radius: 5px;
-  float: none;
-}
-
-#infoContainer .carousel-item{
-  float: none;
-}
-
-#infoImagenes img {
+/* Tamaño máximo del carrusel */
+#miCarousel {
   max-width: 50%;
+}
+
+/* Color de fondo de los botones del carrusel, eran blancos y no se veian con algunas imágenes */
+.carousel-control-prev,
+.carousel-control-next {
+  background-color: rgba(128, 128, 128, 0.404);
 }
 
   /* Comentario.CCS */
