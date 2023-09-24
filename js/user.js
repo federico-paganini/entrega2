@@ -8,25 +8,23 @@ document.addEventListener("DOMContentLoaded", function(){
     li_nav.innerHTML=`<span class ="nav-link">${email}</span>`;
 
     //Aquí comienza el código para crear el menu desplegable del usuario
-    let MenuUser=document.getElementById("MenuUser");
-    console.log("Elemento MenuUser:", MenuUser);
-    let Usuario_li = document.getElementById("usuario");
+    let MenuDesplegable=document.createElement("ul");
     
+    MenuDesplegable.innerHTML= ` 
+    <li><a href="my-profile.html">Mi perfil</a></li>
+    <li><a href="cart.html">Mi carrito</a></li>
+    <li><a href="login.html">Cerrar sesión</a></li>
+`; 
 
-    Usuario_li.addEventListener("click", ()=>{
-        if(MenuUser.style.display==='none' || MenuUser.style.display===''){
-            MenuUser.style.display='block';
+    let Usuario_li = document.getElementById("usuario");
+
+    Usuario_li.addEventListener("click", ()=> {
+        if(MenuDesplegable.style.display==='none' || MenuDesplegable.style.display===''){
+            MenuDesplegable.style.display='block';
         } else {
-            MenuUser.style.display='none';
+            MenuDesplegable.style.display='none';
             }
-
-            MenuUser.innerHTML= ` 
-            <ul>
-            <li><a href="my-profile.html">Mi perfil</a></li>
-            <li><a href="cart.html">Mi carrito</a></li>
-            <li><a href="login.html">Cerrar sesión</a></li>
-            </ul>
-        `; 
     });
+    Usuario_li.appendChild(MenuDesplegable);
 });
     
